@@ -20,24 +20,24 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            target: android
-            build_path: build/app/outputs/flutter-apk
-          - os: macos-latest
-            target: ios
-            build_path: build/ios
-          - os: ubuntu-latest
-            target: web
-            build_path: build/web
-          - os: ubuntu-latest
-            target: linux
-            build_path: build/linux/x64/release/bundle
+          # - os: ubuntu-latest
+          #   target: android
+          #   build_path: build/app/outputs/flutter-apk
+          # - os: macos-latest
+          #   target: ios
+          #   build_path: build/ios
+          # - os: ubuntu-latest
+          #   target: web
+          #   build_path: build/web
+          # - os: ubuntu-latest
+          #   target: linux
+          #   build_path: build/linux/x64/release/bundle
           - os: macos-latest # Catalina
             target: macos
             build_path: build/macos/Build/Products/Release
-          - os: windows-latest
-            target: windows
-            build_path: build\windows\runner\Release
+          # - os: windows-latest
+          #   target: windows
+          #   build_path: build\windows\runner\Release
 
     steps:
       - uses: subosito/flutter-action@v2
@@ -172,15 +172,15 @@ jobs:
           files: ${{ env.pkg_name }}*
           token: ${{ secrets.WINGET }}
 
-  winget-publish:
-    needs: create-build
-    runs-on: windows-latest # action can only be run on windows
-    steps:
-      - uses: vedantmgoyal2009/winget-releaser@v2
-        with:
-          identifier: Suwayomi.Tachidesk-Sorayomi
-          version: ${{ github.ref_name }}
-          token: ${{ secrets.WINGET }}
+  # winget-publish:
+  #   needs: create-build
+  #   runs-on: windows-latest # action can only be run on windows
+  #   steps:
+  #     - uses: vedantmgoyal2009/winget-releaser@v2
+  #       with:
+  #         identifier: Suwayomi.Tachidesk-Sorayomi
+  #         version: ${{ github.ref_name }}
+  #         token: ${{ secrets.WINGET }}
   homebrew-publish:
     needs: create-build
     runs-on: macos-latest
